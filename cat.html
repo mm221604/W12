@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>貓咪個性美容指南｜喵喵美容室</title>
+<style>
+  body{margin:0;background:#f7f4fb;color:#2e2a35;font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;line-height:1.7}
+  .wrap{max-width:760px;margin:0 auto;padding:32px 16px}
+  .back-link{display:inline-block;margin-bottom:16px;color:#6b4c9a;background:#efe7fa;text-decoration:none;font-weight:700;padding:6px 14px;border-radius:99px;border:1px solid #e6dff0;transition:background .2s}
+  .back-link:hover{background:#e2d4f5}
+  .card{background:#fff;border:1px solid #e6dff0;border-radius:16px;padding:24px;margin-bottom:16px}
+  h1{margin:0 0 8px;color:#6b4c9a}
+  h2{margin:0 0 12px;color:#6b4c9a;font-size:1.25rem}
+  .options{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+  @media (max-width:520px){.options{grid-template-columns:1fr}}
+  .opt-btn{appearance:none;background:#faf8fd;color:#2e2a35;border:2px solid #e6dff0;border-radius:12px;padding:14px 16px;font-size:1rem;font-family:inherit;font-weight:700;cursor:pointer;text-align:left;transition:all .15s}
+  .opt-btn:hover{border-color:#7d5bb0;background:#f3eefb}
+  .opt-btn.active{background:#7d5bb0;color:#fff;border-color:#7d5bb0}
+  .empty-hint{text-align:center;color:#7a7285;padding:24px 12px;margin:0;background:#faf8fd;border:1px dashed #d8cce8;border-radius:12px;font-weight:700}
+  .info-list{display:grid;gap:12px;margin-top:12px}
+  .info-item{background:#faf8fd;border-left:4px solid #7d5bb0;border-radius:8px;padding:12px 16px}
+  .info-label{display:inline-block;background:#efe7fa;color:#6b4c9a;border-radius:99px;padding:2px 10px;font-size:.85rem;font-weight:700;margin-bottom:6px}
+  .info-text{margin:0}
+  small{color:#7a7285}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="index.html">← 回首頁</a>
+
+  <div class="card">
+    <h1>🐾 貓咪個性美容指南</h1>
+    <p>點選你家貓咪的個性，看看適合怎麼安排美容：</p>
+    <div class="options" role="group" aria-label="選擇貓咪個性">
+      <button type="button" class="opt-btn" data-type="shy">😿 怕生膽小</button>
+      <button type="button" class="opt-btn" data-type="aggressive">😾 會抓人咬人</button>
+      <button type="button" class="opt-btn" data-type="active">🐈 好動坐不住</button>
+      <button type="button" class="opt-btn" data-type="senior">🐱 老貓（10 歲以上）</button>
+    </div>
+  </div>
+
+  <div class="card" id="result-card" aria-live="polite">
+    <p class="empty-hint">請先選一種個性</p>
+  </div>
+
+  <p><small>虛構店家，課堂練習用。</small></p>
+</div>
+
+<script>
+  const guideData = {
+    shy: {
+      title: "😿 怕生膽小的貓咪",
+      method: "先在獨立安靜房間讓貓咪自由嗅聞適應 15 分鐘，全程一對一輕聲安撫，使用低分貝溫風吹水機與毛巾包覆減敏洗護。",
+      duration: "約 90～120 分鐘（含環境適應與中間休息時間）",
+      notice: "出門前請在提籠內放一件有家裡氣味的小毛毯，提籠外蓋上透氣布減少視覺刺激；洗護前一天避免更換新環境。"
+    },
+    aggressive: {
+      title: "😾 會抓人咬人的貓咪",
+      method: "由兩位資深貓美容師協同作業，配戴透氣防咬頭套與柔軟保定袋，先修剪指甲再分段快速清潔，若緊張度過高會立即暫停改為乾洗護理。",
+      duration: "約 60～90 分鐘（視貓咪情緒狀況彈性調整，絕不強迫完成）",
+      notice: "預約時請務必事先告知曾咬人或抓人的情境；建議飼主在等候區休息，避免貓咪看到飼主反而更加激動掙扎。"
+    },
+    active: {
+      title: "🐈 好動坐不住的貓咪",
+      method: "採「分段快洗＋互動分散注意力」模式，在美容桌與烘箱準備安全玩具或肉泥舔食墊，減少長時間固定不動的焦躁感。",
+      duration: "約 75～90 分鐘",
+      notice: "來店前可先在家陪貓咪放電玩耍 15～20 分鐘；若貓咪對特定零食過敏，請自備平時最愛的肉泥或凍乾帶來店裡。"
+    },
+    senior: {
+      title: "🐱 老貓（10 歲以上）",
+      method: "全程使用恆溫保暖墊與溫水快速擦洗（或局部低敏泡沫洗），避免長時間站立壓迫關節，吹乾時採用手持溫風搭配吸水毛巾減少體力消耗。",
+      duration: "約 45～60 分鐘（速戰速決，以舒適不疲勞為最高原則）",
+      notice: "請先確認近期健康檢查狀況（特別是心臟、腎臟與關節問題），建議飼主全程在店內陪同觀察，若有任何喘氣或不適會立即停止。"
+    }
+  };
+
+  const buttons = document.querySelectorAll(".opt-btn");
+  const resultCard = document.getElementById("result-card");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const data = guideData[btn.dataset.type];
+      resultCard.innerHTML = `
+        <h2>${data.title}</h2>
+        <div class="info-list">
+          <div class="info-item">
+            <span class="info-label">美容方式</span>
+            <p class="info-text">${data.method}</p>
+          </div>
+          <div class="info-item">
+            <span class="info-label">大約多久</span>
+            <p class="info-text">${data.duration}</p>
+          </div>
+          <div class="info-item">
+            <span class="info-label">飼主要注意的事</span>
+            <p class="info-text">${data.notice}</p>
+          </div>
+        </div>
+      `;
+    });
+  });
+</script>
+</body>
+</html>
